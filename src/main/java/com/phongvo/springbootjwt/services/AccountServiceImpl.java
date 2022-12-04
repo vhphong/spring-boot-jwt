@@ -6,6 +6,11 @@ import com.phongvo.springbootjwt.repositories.AccountRepository;
 import com.phongvo.springbootjwt.repositories.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,10 +20,38 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements AccountService {//, UserDetailsService {
 
     private final AccountRepository accountRepository;
     private final RoleRepository roleRepository;
+
+//    @Autowired
+//    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+//    public AccountServiceImpl(AccountRepository accountRepository, RoleRepository roleRepository) {
+//        this.accountRepository = accountRepository;
+//        this.roleRepository = roleRepository;
+//    }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String accountUserName) throws UsernameNotFoundException {
+//        Account account = accountRepository.findByAccountUserName(accountUserName);
+//
+//        if (account == null) {
+//            log.error("User not found in the database");
+//            throw new UsernameNotFoundException("User not found in the database");
+//        } else {
+//            log.error("User found in the database: {}", accountUserName);
+//        }
+//
+//        Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//        account.getRoles().forEach(role -> {
+//            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
+//        });
+//        return new org.springframework.security.core.userdetails.User(account.getAccountUserName(), account.getAccountPassword(), authorities);
+
+//        return null;
+//    }
 
     @Override
     public Account saveAccount(Account account) {
@@ -51,4 +84,14 @@ public class AccountServiceImpl implements AccountService {
         log.info("Fetching all accounts.");
         return accountRepository.findAll();
     }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return null;
+//    }
+
+//    @Override
+//    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//        return null;
+//    }
 }
