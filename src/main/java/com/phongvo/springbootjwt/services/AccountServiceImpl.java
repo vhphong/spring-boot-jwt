@@ -22,16 +22,19 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account saveAccount(Account account) {
+        log.info("Saving account {} to the database.", account.getAccountName());
         return accountRepository.save(account);
     }
 
     @Override
     public Role saveRole(Role role) {
+        log.info("Saving new role {} to the database.", role.getRoleName());
         return roleRepository.save(role);
     }
 
     @Override
     public void addRoleToAccount(String accountName, String roleName) {
+        log.info("Saving new role {} to the account {}.", roleName, accountName);
         Account account = accountRepository.findByAccountName(accountName);
         Role role = roleRepository.findByRoleName(roleName);
         account.getRoles().add(role);
@@ -39,11 +42,13 @@ public class AccountServiceImpl implements AccountService {
 
     @Override
     public Account getAccount(String accountName) {
+        log.info("Fetching account {}.", accountName);
         return accountRepository.findByAccountName(accountName);
     }
 
     @Override
-    public List<Account> getAccount() {
+    public List<Account> getAccounts() {
+        log.info("Fetching all accounts.");
         return accountRepository.findAll();
     }
 }
