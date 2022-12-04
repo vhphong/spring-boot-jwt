@@ -17,8 +17,8 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long accountId;
     private String accountName;
-    private String username;
-    private String password;
+    private String accountUserName;
+    private String accountPassword;
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 }

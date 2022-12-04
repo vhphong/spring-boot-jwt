@@ -33,9 +33,9 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public void addRoleToAccount(String accountName, String roleName) {
-        log.info("Saving new role {} to the account {}.", roleName, accountName);
-        Account account = accountRepository.findByAccountName(accountName);
+    public void addRoleToAccount(String accountUserName, String roleName) {
+        log.info("Saving new role {} to the account userName {}.", roleName, accountUserName);
+        Account account = accountRepository.findByAccountUserName(accountUserName);
         Role role = roleRepository.findByRoleName(roleName);
         account.getRoles().add(role);
     }
